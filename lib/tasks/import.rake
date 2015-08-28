@@ -29,6 +29,7 @@ namespace :import  do
 	desc "Import artists from CSV"
 	task artists: :environment do
 		counter = 0
+		id = 1
 		print "This will delete all of the current artists and replace them. Continue? (Y, N) "
 		continue = STDIN.gets.chomp.downcase
 
@@ -37,9 +38,10 @@ namespace :import  do
 			table.destroy_all
 			CSV.foreach("db/csv/artists.csv") do |row|
 				artist = row[0]
-				artist = Artist.create(artist: artist)
+				artist = Artist.create(id: id, artist: artist)
 				puts "#{artist} - #{artist.errors.full_messages.join(",")}" if artist.errors.any?
 				counter += 1 if artist.persisted?
+				id += 1 if artist.persisted?
 			end
 
 			puts "Deleted old artists and imported #{counter} new artists"
