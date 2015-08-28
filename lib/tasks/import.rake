@@ -30,4 +30,19 @@ namespace :import  do
 
 		puts "Imported #{counter} artists"
 	end
+
+
+	desc "Import playlists from CSV"
+	task playlists: :environment do
+		counter = 0
+
+		CSV.foreach("db/csv/playlists.csv") do |row|
+			playlist = row[0]
+			playlist = Playlist.create(playlist: playlist)
+			puts "#{playlist} - #{playlist.errors.full_messages.join(",")}" if playlist.errors.any?
+			counter += 1 if playlist.persisted?
+		end
+
+		puts "Imported #{counter} playlists"
+	end
 end
