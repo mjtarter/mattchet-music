@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827205016) do
+ActiveRecord::Schema.define(version: 20150828022743) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "artist",     limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "artists", ["artist"], name: "index_artists_on_artist", unique: true, using: :btree
 
   create_table "playlists", force: :cascade do |t|
     t.string   "playlist",   limit: 255
