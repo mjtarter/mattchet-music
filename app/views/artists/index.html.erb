@@ -1,6 +1,16 @@
-<ul>
+<table class='table table-striped'>
+	<th></th>
+	<th>Song</th>
+	<th>Artist</th>
+	<th>Feautured Artists</th>
+
 	<% @songs.each do |song| %>
-	<li><%= song.title %></li>
-	<li><%= song.artist.try(:artist) %></li>
+	<% artist = song.artist.try(:artist).to_s %>
+	<tr>
+		<td></td>
+		<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist) %></td>
+		<td><%= artist %></td>
+		<td></td>
+	</tr>
 	<% end %>
-</ul>
+</table>
