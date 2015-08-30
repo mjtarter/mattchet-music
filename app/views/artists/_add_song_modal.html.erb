@@ -1,0 +1,59 @@
+<!-- Contact Form Modal -->
+<div class="modal fade" id="add-song-modal">
+  <div class="modal-dialog">
+    <div class="modal-content main-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p class="h2 m-0"><i><b>Add Song</b></i></p>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="form-horizontal" action="index.php">
+          <div class="form-group">
+            <label for="first-name">Title *</label>
+            <input type="text" name="add_song_title">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Artist *</label>
+            <input type="text" name="add_artist">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Featured Artist</label>
+            <input type="text" name="add_featured_1">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Featured Artist</label>
+            <input type="text" id="artist" name="add_featured_2">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Featured Artist</label>
+            <input type="text" id="artist" name="add_featured_3">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Featured Artist</label>
+            <input type="text" id="artist" name="add_featured_4">
+          </div>
+          <label for="playlists" style="margin-bottom:0px">Add to Playlists</label>
+          <div id="playlists" class="text-center">
+            <?php
+              $column_name = array();
+              $result = mysql_query("select column_name from information_schema.columns where table_name='playlist' and column_name like '%playlist%'");
+              while ($x = mysql_fetch_assoc($result)){
+                $column_names[] = $x['column_name'];
+              }
+              foreach ($column_names as $col) { 
+                echo '<div class="checkbox-inline" style="padding-top:0px">
+                        <label class="checkbox-inline">
+                          <input type="checkbox" name="add_' . $col . '" id="service_1" value="1">' . $col . 
+                        '</label>
+                      </div>';
+                    }?>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="button orange-button" value="Submit">
+          </div>
+        </form>    
+      </div>
+    </div>          
+  </div>
+</div>
+<!-- End Modal -->

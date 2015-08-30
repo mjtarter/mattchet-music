@@ -7,8 +7,8 @@
 	<% @songs.each do |song| %>
 	<% artist = song.artist.try(:artist).to_s %>
 	<tr>
-		<td></td>
-		<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist) %></td>
+		<td>Edit</td>
+		<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
 		<td><%= artist %></td>
 		<td></td>
 	</tr>
