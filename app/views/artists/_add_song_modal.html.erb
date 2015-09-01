@@ -6,14 +6,21 @@
         <p class="h2 m-0"><i><b>Add Song</b></i></p>
       </div>
       <div class="modal-body">
-      <%= form_for(:song, :url => {:action => 'add_song'}) do |f| %>
-      <div class="form-group">
-            <label for="first-name">Title *</label>
-            <%= f.text_field(:title) %>
-          </div>
-          <%= submit_tag("Create Song") %>
-      </div>
+      
+      <%= form_tag(:action => 'add_song') do %>
+        
+        <div class="form-group">
+          <label for="first-name">Title *</label>
+          <%= text_field(:song, :title) %>
+        </div>
+        <div class="form-group">
+          <label for="artist">Artist *</label>
+          <%= text_field(:artist, :artist) %>
+        </div>
+        <%= submit_tag("Add Song") %>
+
       <% end %>
+      </div>
     </div>          
   </div>
 </div>
