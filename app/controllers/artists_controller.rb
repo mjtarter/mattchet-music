@@ -5,7 +5,7 @@ class ArtistsController < ApplicationController
 	end
 
 	def add_song
-		
+
 		# if artist does not currently exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
 		# else: Add new title, and existing artist_id to Song Table
 
@@ -27,6 +27,9 @@ class ArtistsController < ApplicationController
 		@song.save
 		redirect_to(:action => 'index')
 
+	end
+
+	def edit_song
 	end
 
 end
