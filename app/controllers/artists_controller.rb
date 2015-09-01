@@ -32,4 +32,7 @@ class ArtistsController < ApplicationController
 	def edit_song
 	end
 
+	def delete_song
+	end
+
 end

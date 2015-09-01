@@ -17,9 +17,20 @@
           <label for="artist">Artist: </label>
           <%= text_field(:artist, :artist) %>
         </div>
-        <%= submit_tag("Edit Song") %>
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          <span class="glyphicon glyphicon-pencil"></span> Edit Song
+        <% end %>
 
       <% end %>
+
+      <%= form_tag({:action => 'delete_song'}) do %><br>
+
+        <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
+          <span class="glyphicon glyphicon-remove"></span> Delete Song
+        <% end %>
+
+      <% end %>
+      
       </div>
     </div>          
   </div>
