@@ -23,8 +23,11 @@ class ArtistsController < ApplicationController
 			@song = Song.new(params.require(:song).permit(:title))
 			@song.artist_id = artist_exists.id 
 		end
-		
-		@song.save
+
+		if @song.save
+			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
+		end
+
 		redirect_to(:action => 'index')
 
 	end

@@ -14,6 +14,13 @@
 
     </head>
     <body>
+        
+        <% if !flash[:notice].blank? %>
+            <div class="notice">
+                <%=raw flash[:notice] %>
+            </div>
+        <% end %>
+
         <%= render(:partial => "add_song_modal") %>
         <%= render(:partial => "edit_song_modal") %>
         <nav>
