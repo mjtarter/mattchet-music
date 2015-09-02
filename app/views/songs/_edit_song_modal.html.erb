@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
       
-      <%= form_tag({:action => 'edit_song'}) do %>
+      <%= form_tag({:action => 'update'}) do %>
         
         <div class="form-group">
           <label for="song">Song: </label>
@@ -23,7 +23,7 @@
 
       <% end %>
 
-      <%= form_tag({:action => 'delete_song'}) do %><br>
+      <%= form_tag({:action => 'destroy'}) do %><br>
 
         <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
           <span class="glyphicon glyphicon-remove"></span> Delete Song

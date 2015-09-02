@@ -1,10 +1,10 @@
-class ArtistsController < ApplicationController
+class SongsController < ApplicationController
 
 	def index
 		@songs = Song.all
 	end
 
-	def add_song
+	def create
 
 		# if artist does not currently exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
 		# else: Add new title, and existing artist_id to Song Table
@@ -32,10 +32,10 @@ class ArtistsController < ApplicationController
 
 	end
 
-	def edit_song
+	def update
 	end
 
-	def delete_song
+	def destroy
 	end
 
 end
