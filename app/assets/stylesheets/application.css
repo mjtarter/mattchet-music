@@ -13,7 +13,6 @@
  *= require bootstrap.min
  *= require_tree .
  *= require_self
- *= require global
  */
 
 /* Override Bootstrap default fonts location */
@@ -24,4 +23,114 @@
        url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/* ==========================================================================
+ 	Helper Classes
+   ========================================================================== */
+
+.m-0 {
+	margin:0px;
+}
+
+.m-vert-5 {
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.m-vert-10 {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.p-10 {
+	padding:10px;
+}
+
+.p-vert-5 {
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.p-vert-10 {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.p-vert-50 {
+	padding-top:50px;
+	padding-bottom:50px;
+}
+
+.p-top-10 {
+	padding-top:10px;
+}
+
+.inline-block {
+	display:inline-block;
+}
+
+.vert-middle {
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.no-float {
+	float:none;
+}
+
+/* ==========================================================================
+ 	Header / Nav
+   ========================================================================== */
+
+header {
+	border-bottom:2px solid black;
+}
+
+#logo {
+	font-size:2em; 
+	margin:0 auto; 
+	display:table;
+}
+
+nav ul li ul {
+	display:none;
+	position:absolute;
+	margin:0px;
+	padding:0px;
+}
+
+nav ul li:hover ul {
+	display:block;
+}
+
+ul {
+	list-style:none;
+}
+
+ul li {
+	color:#337ab7;
+}
+
+ul li:hover {
+	color:black;
+}
+
+ul li:hover ul{
+	background-color:white;
+	border:2px solid black;
+	padding:0px 4px 0px 4px;
+}
+
+/* ==========================================================================
+ 	CRUD
+   ========================================================================== */
+
+.notice {
+	background-color:silver;
+	border:1px solid black;
+	text-align:center;
+	color:white;
+	font-weight:bold;
+	padding:10px 0px;
 }
