@@ -7,19 +7,8 @@
       </div>
       <div class="modal-body">
       
-      <%= form_tag(:action => 'create') do %>
-        
-        <div class="form-group">
-          <label for="first-name">Title *</label>
-          <%= text_field(:song, :title) %>
-        </div>
-        <div class="form-group">
-          <label for="artist">Artist *</label>
-          <%= text_field(:artist, :artist) %>
-        </div>
-        <%= submit_tag("Add Song") %>
+        <%= render(:partial => "add_song_form") %>
 
-      <% end %>
       </div>
     </div>          
   </div>

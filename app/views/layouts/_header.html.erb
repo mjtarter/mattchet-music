@@ -17,7 +17,7 @@
         
         <% if !flash[:notice].blank? %>
             <div class="notice">
-                <%=raw flash[:notice] %>
+                <%= flash[:notice].html_safe %>
             </div>
         <% end %>
 
