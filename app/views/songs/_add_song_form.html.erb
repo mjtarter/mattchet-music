@@ -1,11 +1,12 @@
 <%= form_tag(:action => 'create') do %>
-  
+<%= error_messages_for(@song) %>
+
   <div class="form-group">
-    <label for="first-name">Title *</label>
+    <%= label_tag :title, 'Title *' %>
     <%= text_field(:song, :title) %>
   </div>
   <div class="form-group">
-    <label for="artist">Artist *</label>
+    <%= label_tag :artist, 'Artist *' %>
     <%= text_field(:artist, :artist) %>
   </div>
   <%= submit_tag("Add Song") %>

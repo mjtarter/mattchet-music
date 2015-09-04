@@ -26,9 +26,12 @@ class SongsController < ApplicationController
 
 		if @song.save
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
-		end
+			redirect_to(:action => 'index')
+		else
+					@songs = Song.all
 
-		redirect_to(:action => 'index')
+			render('index')
+		end
 
 	end
 
