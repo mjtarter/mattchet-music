@@ -6,8 +6,8 @@ class SongsController < ApplicationController
 
 	def create
 
-		# if artist does not currently exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
-		# else: Add new title, and existing artist_id to Song Table
+		# if artist does not exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
+		# else: Add new title, and existing artist_id to SongTbl
 
 		new_artist = params[:artist][:artist]
 		artist_exists = Artist.all.find_by_artist(new_artist)
