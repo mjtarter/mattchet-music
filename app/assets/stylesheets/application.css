@@ -134,3 +134,8 @@ ul li:hover ul{
 	font-weight:bold;
 	padding:10px 0px;
 }
+
+/* Make validation errors horizontal */
+.field_with_errors {
+    display: inline-block;
+}
