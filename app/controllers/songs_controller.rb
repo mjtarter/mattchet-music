@@ -4,6 +4,9 @@ class SongsController < ApplicationController
 		@songs = Song.all
 	end
 
+	def new
+	end
+
 	def create
 
 		# if artist does not exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
@@ -28,13 +31,15 @@ class SongsController < ApplicationController
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
 			redirect_to(:action => 'index')
 		else
-			@songs = Song.all
-			render('index')
+			render('new')
 		end
 
 	end
 
-	def update
+	def edit
+		@song = Song.find(params[:id])
+		@songs = Song.all
+		render('index')
 	end
 
 	def destroy

@@ -1,3 +1,11 @@
+<% if !@song.blank? %>
+	<script>
+		$(document).ready(function(){
+    		$("#edit-song-modal").modal("show");
+		});
+	</script>
+<% end %>
+
 <table class='table table-striped'>
 	<th></th>
 	<th>Title</th>
@@ -7,7 +15,7 @@
 	<% @songs.each do |song| %>
 	<% artist = song.artist.try(:artist).to_s %>
 	<tr>
-		<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, "#edit-song-modal", "data-toggle" => "modal") %></td>
+		<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:action => 'edit', :id => song.id}) %></td>
 		<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
 		<td><%= artist %></td>
 		<td></td>
