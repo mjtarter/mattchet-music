@@ -38,8 +38,46 @@ class SongsController < ApplicationController
 
 	def edit
 		@song = Song.find(params[:id])
+		@artist = Artist.find(params[:artist_id])
 		@songs = Song.all
 		render('index')
+	end
+
+	def update
+		
+		@artist = Artist.find(params[:artist_id])
+		@songs_by_artist = [Song.find_by_artist_id(@artist)]
+
+		if @songs_by_artist.count > 1 
+
+			@artist = Artist.new(params.require(:artist).permit(:artist))
+			@artist.save
+
+			@song = Song.find(params[:id])
+			@song.update_attributes(params.require(:song).permit(:title))
+			@song.artist_id = @artist.id
+			@song.save
+
+		else
+			
+			@artist.update_attributes(params.require(:artist).permit(:artist))
+			@artist.save
+			
+			@song = Song.find(params[:id])
+			@song.update_attributes(params.require(:song).permit(:title))
+			@song.artist_id = @artist.id
+			@song.save
+
+		end
+
+
+		if @song.save
+			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
+			redirect_to(:action => 'index')
+		else
+			render('new')
+		end
+	
 	end
 
 	def destroy
