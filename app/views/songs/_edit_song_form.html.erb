@@ -1,4 +1,6 @@
 <%= form_tag({:action => 'update', :id => @song, :artist_id => @artist}) do %>
+
+<%= error_messages_for(@song) %>
   
   <div class="form-group">
     <%= label_tag :title, 'Title: ' %>

@@ -1,5 +1,6 @@
 <%= render(:partial => "edit_song_modal") %>
 
+<!-- If there is a @song value to edit then open the #edit-song-modal on page load !-->
 <% if !@song.blank? %>
 	<script>
 		$(document).ready(function(){

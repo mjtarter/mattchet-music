@@ -4,11 +4,7 @@ class SongsController < ApplicationController
 		@songs = Song.all
 	end
 
-	def new
-	end
-
 	def create
-
 		# if artist does not exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
 		# else: Add new title, and existing artist_id to SongTbl
 
@@ -33,7 +29,6 @@ class SongsController < ApplicationController
 		else
 			render('new')
 		end
-
 	end
 
 	def edit
@@ -43,44 +38,31 @@ class SongsController < ApplicationController
 		render('index')
 	end
 
+
 	def update
+		@song = Song.find(params[:id])
+		new_artist = params[:artist][:artist]
+		artist_exists = Artist.all.find_by_artist(new_artist)
 		
-		@artist = Artist.find(params[:artist_id])
-		@songs_by_artist = [Song.find_by_artist_id(@artist)]
-
-		if @songs_by_artist.count > 1 
-
+		if artist_exists == nil
 			@artist = Artist.new(params.require(:artist).permit(:artist))
 			@artist.save
 
-			@song = Song.find(params[:id])
 			@song.update_attributes(params.require(:song).permit(:title))
 			@song.artist_id = @artist.id
-			@song.save
-
+		
 		else
-			
-			@artist.update_attributes(params.require(:artist).permit(:artist))
-			@artist.save
-			
-			@song = Song.find(params[:id])
 			@song.update_attributes(params.require(:song).permit(:title))
-			@song.artist_id = @artist.id
-			@song.save
-
+			@song.artist_id = artist_exists.id 
 		end
-
 
 		if @song.save
-			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
+			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track updated!'
 			redirect_to(:action => 'index')
 		else
-			render('new')
+			@songs = Song.all
+			render('index')
 		end
-	
-	end
-
-	def destroy
 	end
 
 end
