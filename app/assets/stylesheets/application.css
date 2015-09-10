@@ -43,6 +43,10 @@
 	margin-bottom:10px;
 }
 
+.p-0 {
+	padding:0px;
+}
+
 .p-10 {
 	padding:10px;
 }
@@ -88,7 +92,6 @@ header {
 }
 
 #logo {
-	font-size:2em; 
 	margin:0 auto; 
 	display:table;
 }
@@ -138,4 +141,21 @@ ul li:hover ul{
 /* Make validation errors horizontal */
 .field_with_errors {
     display: inline-block;
+}
+
+/* Modals
+   ========================================================================== */
+
+.modal-content {
+	border:1px solid black;
+	background:#E8E8E8 ;
+}
+
+.modal-header {
+	background: -webkit-linear-gradient(#F8F8F8 , #B0B0B0  ); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#F8F8F8 , #B0B0B0  ); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#F8F8F8 , #B0B0B0  ); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#F8F8F8 , #B0B0B0  ); /* Standard syntax */    
+  	border-bottom: 1px solid black;
+  	padding:5px;
 }
