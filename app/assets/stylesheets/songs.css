@@ -1,4 +1,22 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+
+#new-song-page {
+	background-image:url('../assets/music-wallpaper.jpg');
+	background-size: 100% auto;
+	height:100%;
+	height:calc(100% - 98px);
+	background-repeat:no-repeat;
+}
+
+#add-form {
+	background-color:silver;
+	border-radius: 10px;
+	box-shadow:0px 0px 70px gray;
+	border:1px solid black;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+#new-song-container{
+	height:100%; 
+	display:table;
+}

@@ -26,6 +26,21 @@
 }
 
 /* ==========================================================================
+ 	Style
+   ========================================================================== */
+
+html, body {
+	height:100%;
+	width:100%;
+}
+
+.carousel {
+	/*Fixes flickering text on entire page during slide transitions */
+	position:relative; 
+	z-index:1000
+}
+
+/* ==========================================================================
  	Helper Classes
    ========================================================================== */
 
@@ -43,12 +58,12 @@
 	margin-bottom:10px;
 }
 
-.p-0 {
-	padding:0px;
-}
-
 .p-10 {
 	padding:10px;
+}
+
+.p-top-10 {
+	padding-top:10px;
 }
 
 .p-vert-5 {
@@ -66,10 +81,6 @@
 	padding-bottom:50px;
 }
 
-.p-top-10 {
-	padding-top:10px;
-}
-
 .inline-block {
 	display:inline-block;
 }
@@ -83,12 +94,17 @@
 	float:none;
 }
 
+.m-center {
+	margin:0 auto
+}
+
 /* ==========================================================================
  	Header / Nav
    ========================================================================== */
 
 header {
 	border-bottom:2px solid black;
+	background-color:white;
 }
 
 	header a, header a:hover {
