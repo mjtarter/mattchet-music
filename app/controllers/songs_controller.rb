@@ -5,23 +5,15 @@ class SongsController < ApplicationController
 	end
 
 	def create
-		# if artist does not exist in DB: Add new artist to ArtistTbl & Add new title and new artist_id to SongTbl
-		# else: Add new title, and existing artist_id to SongTbl
-
-		new_artist = params[:artist][:artist]
-		artist_exists = Artist.all.find_by_artist(new_artist)
-		
-		if artist_exists == nil
-			@artist = Artist.new(params.require(:artist).permit(:artist))
-			@artist.save
-
-			@song = Song.new(params.require(:song).permit(:title))
-			@song.artist_id = @artist.id
-		
-		else
-			@song = Song.new(params.require(:song).permit(:title))
-			@song.artist_id = artist_exists.id 
+		# Instantiate a new object using form parameters
+		@artist = Artist.find_by_artist(params[:artist][:artist]) unless params[:artist][:artist].nil?
+		# If artist from form parameters does not exist in db, create new artist
+		if @artist == nil
+			@artist = Artist.create(artist_params)
 		end
+
+		@song = Song.new(song_params)
+		@song.artist_id = @artist.id 
 
 		if @song.save
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track added to library!'
@@ -32,29 +24,24 @@ class SongsController < ApplicationController
 	end
 
 	def edit
-		@song = Song.find(params[:id])
+		# Instantiate new objects using url parameters
+		@song = Song.find(params[:song_id])
 		@artist = Artist.find(params[:artist_id])
+		# Render index action 
 		@songs = Song.all
 		render('index')
 	end
 
-
 	def update
-		@song = Song.find(params[:id])
-		new_artist = params[:artist][:artist]
-		artist_exists = Artist.all.find_by_artist(new_artist)
-		
-		if artist_exists == nil
-			@artist = Artist.new(params.require(:artist).permit(:artist))
-			@artist.save
+		@song = Song.find(params[:song_id])
+		@artist = Artist.find_by_artist(params[:artist][:artist]) unless params[:artist][:artist].nil?
+		# If artist from form parameters does not exist in db, create new artist
+		if @artist == nil
+			@artist = Artist.create(artist_params)
+		end			
 
-			@song.update_attributes(params.require(:song).permit(:title))
-			@song.artist_id = @artist.id
-		
-		else
-			@song.update_attributes(params.require(:song).permit(:title))
-			@song.artist_id = artist_exists.id 
-		end
+		@song.update_attributes(song_params)
+		@song.artist_id = @artist.id
 
 		if @song.save
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track updated!'
@@ -64,5 +51,15 @@ class SongsController < ApplicationController
 			render('index')
 		end
 	end
+
+	private
+		
+		def artist_params
+			params.require(:artist).permit(:artist)
+		end
+
+		def song_params
+			params.require(:song).permit(:title)
+		end
 
 end
