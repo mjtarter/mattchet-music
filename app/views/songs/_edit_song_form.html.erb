@@ -15,3 +15,11 @@
   <% end %>
 
 <% end %>
+
+<%= form_tag({:action => 'delete', :song_id => @song, :artist_id => @artist}) do %><br>
+
+  <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
+    <span class="glyphicon glyphicon-remove"></span> Delete Song
+  <% end %>
+
+<% end %>

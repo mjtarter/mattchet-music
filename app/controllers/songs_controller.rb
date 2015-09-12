@@ -52,6 +52,24 @@ class SongsController < ApplicationController
 		end
 	end
 
+	def delete
+		@song = Song.find(params[:song_id])
+		@artist = Artist.find(params[:artist_id])
+		# Render index action 
+		@songs = Song.all
+		render('index')
+	end
+
+	def destroy
+		if @song = Song.find(params[:song_id]).destroy
+			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track Deleted!'
+			redirect_to(:action => 'index')
+		else
+			@songs = Song.all
+			render('index')
+		end
+	end
+
 	private
 		
 		def artist_params

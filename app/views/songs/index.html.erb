@@ -1,10 +1,20 @@
 <%= render(:partial => "edit_song_modal") %>
+<%= render(:partial => "delete_song_modal") %>
+
 
 <!-- If there is a @song value to edit then open the #edit-song-modal on page load !-->
-<% if !@song.blank? %>
+<% if !@song.blank? && !(params[:action] == 'delete') %>
 	<script>
 		$(document).ready(function(){
     		$("#edit-song-modal").modal("show");
+		});
+	</script>
+<% end %>
+
+<% if !@song.blank? && (params[:action] == 'delete') %>
+	<script>
+		$(document).ready(function(){
+    		$("#delete-song-modal").modal("show");
 		});
 	</script>
 <% end %>

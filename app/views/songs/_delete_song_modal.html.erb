@@ -1,0 +1,27 @@
+<div class="modal fade" id="delete-song-modal">
+  <div class="modal-dialog">
+    <div class="modal-content main-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p class="h4 m-0 text-center" id="logo">
+          <span class="vert-middle">
+            <%= image_tag('logo.png', :alt => 'logo', :style => [ 'height:1.4em;']) %> <i><b>Delete Song</b></i>
+          </span>
+        </p>
+      </div>
+      <div class="modal-body">
+
+        <p class="m-0"><b>Are you sure you want to delete this track?</b></p>
+      
+        <%= form_tag({:action => 'destroy', :song_id => @song, :artist_id => @artist}) do %><br>
+
+          <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
+            <span class="glyphicon glyphicon-remove"></span> Delete Song
+          <% end %>
+
+        <% end %>
+      
+      </div>
+    </div>          
+  </div>
+</div>
