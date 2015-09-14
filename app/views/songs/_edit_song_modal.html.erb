@@ -1,19 +1,8 @@
-<div class="modal fade" id="edit-song-modal">
-  <div class="modal-dialog">
-    <div class="modal-content main-content text-center">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <p class="h4 m-0 text-center" id="logo">
-          <span class="vert-middle">
-            <%= image_tag('logo.png', :alt => 'logo', :style => [ 'height:1.4em;']) %> <i><b>Edit Song</b></i>
-          </span>
-        </p>
-      </div>
-      <div class="modal-body">
+<!-- Variables !-->
+<% @modal_id = "edit-song-modal"
+@modal_title = "Edit Song" 
+@modal_form = "edit_song_form" %>
+
+<!-- End Instance Variables !-->
       
-        <%= render(:partial => "edit_song_form") %>
-      
-      </div>
-    </div>          
-  </div>
-</div>
+<%= render(:partial => "modals_template") %>
