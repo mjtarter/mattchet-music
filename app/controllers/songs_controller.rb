@@ -27,12 +27,14 @@ class SongsController < ApplicationController
 		# Instantiate new objects using url parameters
 		@song = Song.find(params[:song_id])
 		@artist = Artist.find(params[:artist_id])
+		@artist_to_be_updated = Artist.find(params[:artist_id])
 		# Render index action 
 		@songs = Song.all
 		render('index')
 	end
 
 	def update
+		@artist_to_be_updated = (params[:artist_to_be_updated])
 		@song = Song.find(params[:song_id])
 		@artist = Artist.find_by_artist(params[:artist][:artist]) unless params[:artist][:artist].nil?
 		# If artist from form parameters does not exist in db, create new artist
@@ -44,6 +46,10 @@ class SongsController < ApplicationController
 		@song.artist_id = @artist.id
 
 		if @song.save
+			# If the old artist_id is no longer being used by any songs, then delete that row from the artist table
+			if Song.find_by_artist_id(@artist_to_be_updated).nil?
+				Artist.find(@artist_to_be_updated).destroy
+			end
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track updated!'
 			redirect_to(:action => 'index')
 		else
@@ -61,13 +67,15 @@ class SongsController < ApplicationController
 	end
 
 	def destroy
-		if @song = Song.find(params[:song_id]).destroy
-			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track Deleted!'
-			redirect_to(:action => 'index')
-		else
-			@songs = Song.all
-			render('index')
+		@song = Song.find(params[:song_id]).artist_id
+		Song.find(params[:song_id]).destroy
+		
+		# If the old artist_id is no longer being used by any songs, then delete that row from the artist table
+		if Song.find_by_artist_id(@song).nil?
+			Artist.find(@song).destroy
 		end
+		flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Track Deleted!'
+		redirect_to(:action => 'index')
 	end
 
 	private

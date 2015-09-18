@@ -1,4 +1,4 @@
-<%= form_tag({:action => 'update', :song_id => @song, :artist_id => @artist}) do %>
+<%= form_tag({:action => 'update', :artist_to_be_updated => @artist_to_be_updated, :song_id => @song, :artist_id => @artist}) do %>
 
 <%= error_messages_for(@song) %>
   
