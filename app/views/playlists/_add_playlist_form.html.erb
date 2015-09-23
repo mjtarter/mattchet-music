@@ -1,0 +1,14 @@
+<%= form_for(:playlist, :url => {:action => 'create'}) do |f| %>
+
+<%= error_messages_for(@playlist) %>
+  
+  <div class="form-group">
+    <%= label_tag :playlist, 'Playlist Name: ' %>
+    <%= f.text_field(:playlist) %>
+  </div>
+
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+    <span class="glyphicon glyphicon-pencil"></span> Create Playlist
+  <% end %>
+
+<% end %>

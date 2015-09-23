@@ -78,6 +78,14 @@ class SongsController < ApplicationController
 		redirect_to(:action => 'index')
 	end
 
+	def create_join
+		@playlist_id = (params[:id])
+		@song_ids = (params[:song][:song_id])
+
+		flash[:notice] = @playlist_id + @song_ids.inspect + '<span class="glyphicon glyphicon-music"></span> Track Deleted!'
+		redirect_to(:action => 'index')
+	end
+
 	private
 		
 		def artist_params

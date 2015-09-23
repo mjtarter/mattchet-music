@@ -31,7 +31,8 @@
         </p>
         <nav>
           <ul class="list-unstyled text-center col-xs-12">
-            <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:action => 'new'}) %>
+            <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:controller => 'songs', :action => 'new'}) %>
+            <%= link_to('<li class="inline-block p-10">Create Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'new'}) %>
             <li class="inline-block p-10"><span class="glyphicon glyphicon-chevron-down"></span> Playlists
               <ul>
                 <li>All</li>
