@@ -82,12 +82,20 @@ class SongsController < ApplicationController
 		@playlist_id = (params[:id])
 		@song_ids = (params[:song][:song_id])
 
-		flash[:notice] = @playlist_id + @song_ids.inspect + '<span class="glyphicon glyphicon-music"></span> Track Deleted!'
-		redirect_to(:action => 'index')
+		if 
+			@song_ids.each do |song_id|
+				Playlisting.create(:song_id => song_id, :playlist_id => @playlist_id)
+			end
+
+			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Songs added to playlist!'
+			redirect_to(:action => 'index')
+		else
+
+		end
 	end
 
 	private
-		
+
 		def artist_params
 			params.require(:artist).permit(:artist)
 		end
