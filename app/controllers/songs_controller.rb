@@ -78,22 +78,6 @@ class SongsController < ApplicationController
 		redirect_to(:action => 'index')
 	end
 
-	def create_join
-		@playlist_id = (params[:id])
-		@song_ids = (params[:song][:song_id])
-
-		if 
-			@song_ids.each do |song_id|
-				Playlisting.create(:song_id => song_id, :playlist_id => @playlist_id)
-			end
-
-			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Songs added to playlist!'
-			redirect_to(:action => 'index')
-		else
-
-		end
-	end
-
 	private
 
 		def artist_params

@@ -1,19 +1,13 @@
-<!-- Instance Variables !-->
+<!-- Instance Variables & Modals !-->
 <% @page_title = "Mattchet Music | Library" %>
-<!-- End Instance Variables !-->
-
 
 <%= render(:partial => "/songs/edit_song_modal") %>
 <%= render(:partial => "/songs/delete_song_modal") %>
 <%= render(:partial => "/playlists/add_playlist_modal") %>
 
-<script>
-	function myFunction() {
-    document.getElementById("hey").submit();
-}
-</script>
+<!-- ********** Conditionals to display the required Modal ********** !-->
 
-<!-- If there is a @song value to edit then open the #edit-song-modal on page load !-->
+<!-- open #edit-song-modal on page load !-->
 <% if !@song.blank? && !(params[:action] == 'delete') %>
 	<script>
 		$(document).ready(function(){
@@ -22,7 +16,7 @@
 	</script>
 <% end %>
 
-<!-- If there is a @song value to delete then open the #delete-song-modal on page load !-->
+<!-- open #delete-song-modal on page load !-->
 <% if !@song.blank? && (params[:action] == 'delete') %>
 	<script>
 		$(document).ready(function(){
@@ -31,7 +25,7 @@
 	</script>
 <% end %>
 
-<!-- If controller/action is playlists/new then open the #add-playlist-modal on page load !-->
+<!-- open #add-playlist-modal on page load !-->
 <% if params[:action] == 'new' && params[:controller] == 'playlists' %>
 	<script>
 		$(document).ready(function(){
@@ -40,15 +34,24 @@
 	</script>
 <% end %>
 
-<!-- If playlists/new action then show the following !-->
-<% if params[:action] == 'create' && params[:controller] == 'playlists' %>
+<!-- ********** END Conditionals for Modals ********** !-->
+
+<!-- Conditional to show "Create Playlist Message" !-->
+<% if params[:controller] == 'playlists' && params[:action] == 'create_name' %>
+	
 	<p class="text-center">Check songs to be add to playlist and then click create.</p>
-	<%= button_tag(type: 'submit', class: "btn btn-danger", onclick: "myFunction()") do %>
+	<%= button_tag(type: 'submit', class: "btn btn-danger", onclick: "createPlaylistSubmit()") do %>
     	<span class="glyphicon glyphicon-remove"></span> Create Playlist
   	<% end %>
+  	
+  	<%= javascript_tag do %>
+		function createPlaylistSubmit() {
+			document.getElementById("create-playlist").submit();
+		}
+	<% end %>
+
 <% end %>
-
-
+<!-- End Conditional !-->
 
 <table class='table table-striped'>
 	<th></th>
@@ -56,14 +59,14 @@
 	<th>Artist</th>
 	<th>Feautured Artists</th>
 
-	<% if params[:action] == 'create' && params[:controller] == 'playlists' %>
-		<%= form_for(:song, :url => {:controller => 'songs', :action => 'create_join', :id => @playlist_id}, html: {id: "hey"}) do |f| %>
+	<% if params[:action] == 'create_name' && params[:controller] == 'playlists' %>
+		<%= form_for(:song, :url => {:controller => 'playlists', :action => 'add_songs', :id => @playlist_id}, html: {id: "create-playlist"}) do |f| %>
 			
 			<% @songs.each do |song| %>
 				<% artist = song.artist.try(:artist).to_s %>
 					
 				<tr>
-					<% if params[:action] == 'create' && params[:controller] == 'playlists' %>
+					<% if params[:action] == 'create_name' && params[:controller] == 'playlists' %>
 						<td> 
 							<div class="form-group">
 				 				<input type="checkbox" name="song[song_id][]" value= <%= song.id %>>  
