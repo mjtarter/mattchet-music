@@ -1,0 +1,21 @@
+<%= form_tag({:action => 'update'}) do %>
+
+<%= error_messages_for(@playlist) %>
+  
+  <div class="form-group">
+    <%= label_tag :playlist, 'Name: ' %>
+    <%= text_field(:playlist, :playlist) %>
+  </div>
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+    <span class="glyphicon glyphicon-pencil"></span> Edit Playlist Name
+  <% end %>
+
+<% end %>
+
+<%= form_tag({:action => 'delete', :song_id => @song, :artist_id => @artist}) do %><br>
+
+  <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
+    <span class="glyphicon glyphicon-remove"></span> Delete playlist
+  <% end %>
+
+<% end %>

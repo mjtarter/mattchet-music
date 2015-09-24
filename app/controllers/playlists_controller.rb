@@ -19,7 +19,7 @@ class PlaylistsController < ApplicationController
 		end
 	end
 
-	def add_songs
+	def create_songs
 		@playlist_id = (params[:id])
 		@song_ids = (params[:song][:song_id])
 
@@ -32,6 +32,20 @@ class PlaylistsController < ApplicationController
 			@songs = Song.all
 			render('index')
 		end
+	end
+
+	def show
+		@playlist_id = (params[:playlist_id]) 
+		@playlist = Playlist.find(@playlist_id)
+		@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
+		@songs = Song.where(id: @song_ids)
+		render('/application/index')
+	end
+
+	def edit
+		@playlist = Playlist.find(params[:playlist_id])
+		@songs = Song.all
+		render('index')
 	end
 
 	private
