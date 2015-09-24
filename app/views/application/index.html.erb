@@ -26,7 +26,7 @@
 <% end %>
 
 <!-- open #add-playlist-modal on page load !-->
-<% if params[:action] == 'new' && params[:controller] == 'playlists' %>
+<% if (params[:action] == 'new' && params[:controller] == 'playlists') || (params[:action] == 'create_name' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
 	<script>
 		$(document).ready(function(){
     		$("#add-playlist-modal").modal("show");

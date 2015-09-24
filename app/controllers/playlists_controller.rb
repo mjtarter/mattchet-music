@@ -6,7 +6,8 @@ class PlaylistsController < ApplicationController
 	end
 
 	def create_name
-		if @playlist = Playlist.create(playlist_params)
+		@playlist = Playlist.new(playlist_params)
+		if @playlist.save 
 			@playlist_id = @playlist.id
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist created!'
 			@songs = Song.all 
