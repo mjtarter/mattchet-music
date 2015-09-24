@@ -6,5 +6,6 @@ class Song < ActiveRecord::Base
 	
 	validates_associated :artist
 	validates_presence_of :title
+	validates_presence_of :artist
 
 end
