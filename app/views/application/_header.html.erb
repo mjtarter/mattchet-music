@@ -30,14 +30,14 @@
           </span>
         </p>
         <!-- Conditional to show "Playlist Name Heading" !-->
-        <% if params[:controller] == 'playlists' && params[:action] == 'show' %>
+        <% if params[:controller] == 'playlists' && (params[:action] == 'show' || params[:action] == 'edit') %>
           <p class="text-center"><%= @playlist.playlist %></p>
         <% end %>
         <!-- End Conditional !-->
         <nav>
           <ul class="list-unstyled text-center col-xs-12">
             <!-- Conditional to show "Playlist Name Heading" !-->
-        <% if params[:controller] == 'playlists' && params[:action] == 'show' %>
+        <% if params[:controller] == 'playlists' && (params[:action] == 'show' || params[:action] == 'edit' ) %>
           <%= link_to('<li class="inline-block p-10">Edit Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'edit', :playlist_id => @playlist.id}) %>
           <% else %>
            <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:controller => 'songs', :action => 'new'}) %>
