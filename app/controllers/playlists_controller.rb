@@ -64,6 +64,15 @@ class PlaylistsController < ApplicationController
 		end
 	end
 
+	def delete
+		@playlist_id = Playlist.find(params[:playlist_id])
+		@playlist = Playlist.find(@playlist_id)
+		# Render index action 
+		@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
+		@songs = Song.where(id: @song_ids)
+		render('/application/index')
+	end
+
 	private
 	
 		def playlist_params

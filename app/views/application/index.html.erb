@@ -5,6 +5,8 @@
 <%= render(:partial => "/songs/delete_song_modal") %>
 <%= render(:partial => "/playlists/add_playlist_modal") %>
 <%= render(:partial => "/playlists/edit_playlist_modal") %>
+<%= render(:partial => "/playlists/delete_playlist_modal") %>
+
 
 <!-- ********** Conditionals to display the required Modal ********** !-->
 
@@ -40,6 +42,15 @@
 	<script>
 		$(document).ready(function(){
     		$("#edit-playlist-modal").modal("show");
+		});
+	</script>
+<% end %>
+
+<!-- open #delete-playlist-modal on page load !-->
+<% if (params[:action] == 'delete' && params[:controller] == 'playlists') %>
+	<script>
+		$(document).ready(function(){
+    		$("#delete-playlist-modal").modal("show");
 		});
 	</script>
 <% end %>
