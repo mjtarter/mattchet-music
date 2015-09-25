@@ -7,7 +7,6 @@
 <%= render(:partial => "/playlists/edit_playlist_modal") %>
 <%= render(:partial => "/playlists/delete_playlist_modal") %>
 
-
 <!-- ********** Conditionals to display the required Modal ********** !-->
 
 <!-- open #edit-song-modal on page load !-->
@@ -74,7 +73,9 @@
 <% end %>
 
 <table class='table table-striped'>
-	<th></th>
+	<% if (params[:controller] != 'playlists') || (params[:action] == 'create_name') || (params[:action] == 'new') %>
+		<th></th>
+	<% end %>
 	<th>Title</th>
 	<th>Artist</th>
 	<th>Feautured Artists</th>
@@ -106,7 +107,9 @@
 		<% @songs.each do |song| %>
 			<% artist = song.artist.try(:artist).to_s %>
 			<tr>
-				<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
+				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') %>
+					<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
+				<% end %>
 				<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
 				<td><%= artist %></td>
 				<td></td>
