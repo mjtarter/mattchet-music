@@ -60,7 +60,7 @@ class PlaylistsController < ApplicationController
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist name updated!'
 			redirect_to(:action => 'show', :playlist_id => @playlist_id)
 		else
-			render(:action => 'show', :playlist_id => @playlist_id)
+			redirect_to(:action => 'edit', :playlist_id => @playlist_id, :error => 'yes')
 		end
 	end
 
