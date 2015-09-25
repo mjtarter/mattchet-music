@@ -73,6 +73,15 @@ class PlaylistsController < ApplicationController
 		render('/application/index')
 	end
 
+	def destroy
+		Playlisting.destroy_all(:playlist_id => (params[:playlist_id]))
+		Playlist.find(params[:playlist_id]).destroy
+
+		flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist Deleted!'
+		@songs = Song.all
+		redirect_to(:controller => 'songs', :action => 'index')
+	end
+
 	private
 	
 		def playlist_params
