@@ -54,15 +54,20 @@ class PlaylistsController < ApplicationController
 		@playlist_id = params[:playlist_id]
 		@playlist = Playlist.find(params[:playlist_id])
 		@new_name = Playlist.find_by_playlist(params[:playlist][:playlist]) unless params[:playlist][:playlist].nil?
-		# If artist from form parameters does not exist in db, create new artist
-		if @new_name == nil 
+
 			@playlist.update_attributes(playlist_params)
+
+			if @playlist.save
+
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist name updated!'
-			redirect_to(:action => 'show', :playlist_id => @playlist_id)
+			@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
+			@songs = Song.where(id: @song_ids)
+			render('index')
 		else
-			redirect_to(:action => 'edit', :playlist_id => @playlist_id, :error => 'yes')
-		end
-	end
+			@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
+			@songs = Song.where(id: @song_ids)			
+			render('index')
+	end end
 
 	def delete
 		@playlist_id = Playlist.find(params[:playlist_id])

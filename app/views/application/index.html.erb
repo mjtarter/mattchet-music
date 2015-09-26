@@ -37,7 +37,7 @@
 <% end %>
 
 <!-- open #edit-playlist-modal on page load !-->
-<% if (params[:action] == 'edit' && params[:controller] == 'playlists') %>
+<% if (params[:action] == 'edit' && params[:controller] == 'playlists') || (params[:action] == 'update' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
 	<script>
 		$(document).ready(function(){
     		$("#edit-playlist-modal").modal("show");

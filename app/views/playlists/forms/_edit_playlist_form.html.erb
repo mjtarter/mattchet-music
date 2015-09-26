@@ -1,14 +1,6 @@
 <%= form_tag({:action => 'update', :playlist_id => @playlist_id}) do %>
 
-<% if params[:error] == 'yes' %>
-  <div id="errorExplanation">
-    <p class="h4">An error prohibited this record from being saved</p>
-    <p>There were problems with the following fields:</p>
-    <ul>
-      <li>Playlist name is already taken.</li>
-    </ul>
-  </div>
-<% end %>
+<%= error_messages_for(@playlist) %>
   
   <div class="form-group">
     <%= label_tag :playlist, 'Name: ' %>
