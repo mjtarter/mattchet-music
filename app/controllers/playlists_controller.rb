@@ -27,7 +27,7 @@ class PlaylistsController < ApplicationController
 				Playlisting.create(:song_id => song_id, :playlist_id => @playlist_id)
 			end
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Songs added to playlist!'
-			redirect_to(:controller => 'songs', :action => 'index')
+			redirect_to(:action => 'show', :playlist_id => @playlist_id)
 		else
 			@songs = Song.all
 			render('index')
@@ -55,7 +55,7 @@ class PlaylistsController < ApplicationController
 		@playlist = Playlist.find(params[:playlist_id])
 		@new_name = Playlist.find_by_playlist(params[:playlist][:playlist]) unless params[:playlist][:playlist].nil?
 		# If artist from form parameters does not exist in db, create new artist
-		if @new_name == nil
+		if @new_name == nil 
 			@playlist.update_attributes(playlist_params)
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist name updated!'
 			redirect_to(:action => 'show', :playlist_id => @playlist_id)

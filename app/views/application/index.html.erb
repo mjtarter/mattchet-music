@@ -80,6 +80,7 @@
 	<th>Artist</th>
 	<th>Feautured Artists</th>
 
+	<!-- Table if playlists/create_name !-->
 	<% if params[:action] == 'create_name' && params[:controller] == 'playlists' %>
 		<%= form_for(:song, :url => {:controller => 'playlists', :action => 'create_songs', :id => @playlist_id}, html: {id: "create-playlist"}) do |f| %>
 			
@@ -103,7 +104,8 @@
 		<% end %>
 
 	<% else %>
-		
+
+		<!-- Table if NOT playlists/create_name !-->
 		<% @songs.each do |song| %>
 			<% artist = song.artist.try(:artist).to_s %>
 			<tr>

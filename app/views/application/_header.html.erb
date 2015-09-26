@@ -29,21 +29,25 @@
             <%= link_to(image_tag('logo.png', :alt => 'logo', :style => [ 'height:1.5em;']) + ' <b>MATTCHET MUSIC</b>'.html_safe, {:controller => 'songs', :action => 'index'}) %> 
           </span>
         </p>
+
         <!-- Conditional to show "Playlist Name Heading" !-->
-        <% if params[:controller] == 'playlists' && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'delete') %>
+        <% if params[:controller] == 'playlists' && params[:action] != 'new' %>
           <p class="text-center"><%= @playlist.playlist %></p>
         <% end %>
         <!-- End Conditional !-->
+
         <nav>
           <ul class="list-unstyled text-center col-xs-12">
-            <!-- Conditional to show "Playlist Name Heading" !-->
-        <% if params[:controller] == 'playlists' && (params[:action] == 'show' || params[:action] == 'edit' ) %>
-          <%= link_to('<li class="inline-block p-10">Edit Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'edit', :playlist_id => @playlist.id}) %>
-          <% else %>
-           <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:controller => 'songs', :action => 'new'}) %>
-           <%= link_to('<li class="inline-block p-10">Create Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'new'}) %>
-        <% end %>
-        <!-- End Conditional !-->
+            
+            <!-- Conditional to show Nav Links for Songs OR Playlists !-->
+            <% if params[:controller] == 'playlists' && params[:action] != 'new' %>
+              <%= link_to('<li class="inline-block p-10">Edit Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'edit', :playlist_id => @playlist.id}) %>
+            <% else %>
+              <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:controller => 'songs', :action => 'new'}) %>
+              <%= link_to('<li class="inline-block p-10">Create Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'new'}) %>
+            <% end %>
+            <!-- End Conditional !-->
+
             <li class="inline-block p-10"><span class="glyphicon glyphicon-chevron-down"></span> Playlists
               <ul>
                 <% @playlists = Playlist.all %>

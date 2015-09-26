@@ -1,9 +1,5 @@
 class SongsController < ApplicationController
 
-	def index
-		@songs = Song.all
-	end
-
 	def create
 		# Instantiate a new object using form parameters
 		@artist = Artist.find_by_artist(params[:artist][:artist]) unless params[:artist][:artist].nil?
@@ -21,6 +17,10 @@ class SongsController < ApplicationController
 		else
 			render('new')
 		end
+	end
+
+	def index
+		@songs = Song.all
 	end
 
 	def edit
