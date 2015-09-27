@@ -87,6 +87,11 @@ class PlaylistsController < ApplicationController
 		redirect_to(:controller => 'songs', :action => 'index')
 	end
 
+	def redirect_index
+		@songs = Song.all
+		redirect_to(:controller => 'songs', :action => 'index')
+	end
+
 	private
 	
 		def playlist_params
