@@ -45,7 +45,7 @@
 	</script>
 <% end %>
 
-<!-- If user exits add playlist modal without filling out form redirect back to index page !-->
+<!-- Redirect if user exits modal without filling out form !-->
 <script>
 	$('#add-playlist-modal').on('hidden.bs.modal', function () {
 		window.location.assign("redirect_index")
