@@ -45,6 +45,13 @@
 	</script>
 <% end %>
 
+<!-- If user exits add playlist modal without filling out form redirect back to index page !-->
+<script>
+	$('#add-playlist-modal').on('hidden.bs.modal', function () {
+		window.location.assign("redirect_index")
+	});
+</script>
+
 <!-- open #delete-playlist-modal on page load !-->
 <% if (params[:action] == 'delete' && params[:controller] == 'playlists') %>
 	<script>
@@ -54,29 +61,10 @@
 	</script>
 <% end %>
 
-
-
-
-
-
-
-<script>
-$('#add-playlist-modal').on('hidden.bs.modal', function () {
-window.location.assign("redirect_index")
-});
-</script>
-
-
-
-
-
-
-
-
 <!-- ********** END Modals ********** !-->
 
 <!-- Conditional to show "Create Playlist Heading" !-->
-<% if params[:controller] == 'playlists' && params[:action] == 'create_name' %>
+<% if params[:controller] == 'playlists' && params[:action] == 'create_name' && @playlist.errors.size == 0 %>
 	
 	<p class="text-center">Check songs to be add to playlist and then click create.</p>
 	<%= button_tag(type: 'submit', class: "btn btn-danger", onclick: "createPlaylistSubmit()") do %>
@@ -92,7 +80,7 @@ window.location.assign("redirect_index")
 <% end %>
 
 <table class='table table-striped'>
-	<% if (params[:controller] != 'playlists') || (params[:action] == 'create_name') || (params[:action] == 'new') %>
+	<% if (params[:controller] != 'playlists') || (params[:action] == 'create_name' && @playlist.errors.size == 0) || (params[:action] == 'new') %>
 		<th></th>
 	<% end %>
 	<th>Title</th>
@@ -100,21 +88,18 @@ window.location.assign("redirect_index")
 	<th>Feautured Artists</th>
 
 	<!-- Table if playlists/create_name !-->
-	<% if params[:action] == 'create_name' && params[:controller] == 'playlists' %>
+	<% if params[:action] == 'create_name' && params[:controller] == 'playlists' && @playlist.errors.size == 0 %>
 		<%= form_for(:song, :url => {:controller => 'playlists', :action => 'create_songs', :id => @playlist_id}, html: {id: "create-playlist"}) do |f| %>
 			
 			<% @songs.each do |song| %>
 				<% artist = song.artist.try(:artist).to_s %>
 					
 				<tr>
-					<% if params[:action] == 'create_name' && params[:controller] == 'playlists' %>
-						<td> 
-							<div class="form-group">
-				 				<input type="checkbox" name="song[song_id][]" value= <%= song.id %>>  
-				 			</div>
-				 		</td>
-			 		<% end %>
-			
+					<td> 
+						<div class="form-group">
+			 				<input type="checkbox" name="song[song_id][]" value= <%= song.id %>>  
+			 			</div>
+			 		</td>
 					<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
 					<td><%= artist %></td>
 					<td></td>
@@ -128,8 +113,8 @@ window.location.assign("redirect_index")
 		<% @songs.each do |song| %>
 			<% artist = song.artist.try(:artist).to_s %>
 			<tr>
-				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') %>
-					<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
+				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') || (params[:action] == 'create_name' && params[:controller] == 'playlists' && @playlist.errors.size > 0 ) %>
+					<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:controller => 'songs', :action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
 				<% end %>
 				<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
 				<td><%= artist %></td>
