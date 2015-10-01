@@ -20,6 +20,7 @@ class PlaylistsController < ApplicationController
 	end
 
 	def create_songs
+		#If multiple songs added to playlist:
 		if (params[:id]).nil? == false
 			@playlist_id = (params[:id])
 			@song_ids = (params[:song][:song_id])
@@ -33,6 +34,7 @@ class PlaylistsController < ApplicationController
 				@songs = Song.all
 				render('index')
 			end
+		#If 1 individual song is added to playlist:
 		else
 			@playlist_id = (params[:playlist][:id])
 			@song_id = (params[:song_id])

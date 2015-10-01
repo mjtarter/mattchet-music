@@ -10,7 +10,7 @@
 <!-- ********** Conditionals to display the required Modal ********** !-->
 
 <!-- open #edit-song-modal on page load !-->
-<% if !@song.blank? && !(params[:action] == 'delete') || (params[:action] == 'create_songs' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
+<% if !@song.blank? && !(params[:action] == 'delete') || (params[:action] == 'create_songs' && params[:controller] == 'playlists' && @playlist.errors.size > 0) %>
 	<script>
 		$(document).ready(function(){
     		$("#edit-song-modal").modal("show");
@@ -28,7 +28,7 @@
 <% end %>
 
 <!-- open #add-playlist-modal on page load !-->
-<% if (params[:action] == 'new' && params[:controller] == 'playlists') || (params[:action] == 'create_name' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
+<% if (params[:controller] == 'playlists') && ((params[:action] == 'new') || (params[:action] == 'create_name' && @playlist.errors.size > 0)) %>
 	<script>
 		$(document).ready(function(){
     		$("#add-playlist-modal").modal("show");
@@ -44,7 +44,7 @@
 </script>
 
 <!-- open #edit-playlist-modal on page load !-->
-<% if (params[:action] == 'edit' && params[:controller] == 'playlists') || (params[:action] == 'update' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
+<% if (params[:controller] == 'playlists') && ((params[:action] == 'edit') || (params[:action] == 'update' &&  @playlist.errors.size > 0)) %>
 	<script>
 		$(document).ready(function(){
     		$("#edit-playlist-modal").modal("show");
