@@ -24,7 +24,7 @@
 
     <header>
       <div class="container">
-        <p class="text-center p-top-10 col-xs-12 h3" id="logo">
+        <p class="text-center p-top-10 h3" id="logo">
           <span class="vert-middle">
             <%= link_to(image_tag('logo.png', :alt => 'logo', :style => [ 'height:1.5em;']) + ' <b>MATTCHET MUSIC</b>'.html_safe, {:controller => 'songs', :action => 'index'}) %> 
           </span>
@@ -32,7 +32,7 @@
 
         <!-- Conditional to show "Playlist Name Heading" !-->
         <% if params[:controller] == 'playlists' && params[:action] != 'new' && !(params[:action] == 'create_songs' && @playlist.errors.size > 0 ) %>
-          <p class="text-center"><%= @playlist.playlist %></p>
+          <p class="text-center m-0" id="playlist-title"><b><%= @playlist.playlist %></b></p>
         <% end %>
         <!-- End Conditional !-->
 

@@ -117,6 +117,10 @@ header {
 	display:table;
 }
 
+#playlist-title {
+	text-decoration:underline;
+}
+
 nav ul {
 	list-style:none;
 	border-radius:5px;
