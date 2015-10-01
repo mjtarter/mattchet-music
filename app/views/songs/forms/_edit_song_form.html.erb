@@ -21,11 +21,11 @@
   <% end %>
 
   <!-- Add track to playlist form!-->
-  <%= form_for(:playlist, :url => {:controller => 'playlists', :action => 'create_songs', :song_id => @song}, :html => {:class => 'col-xs-6 col-sm-3', :id => 'add-to-playlist-form'}) do |f| %>
+  <%= form_for(:playlist, :url => {:controller => 'playlists', :action => 'create_songs', :song_id => @song}, :html => {:class => 'col-sm-3', :id => 'add-to-playlist-form'}) do |f| %>
   <% @playlists = Playlist.all %>
     
     <div class="form-group">
-      <%= f.select(:id, @playlists.map {|s| [s.playlist, s.id] }) %>
+      <%= f.select(:id, @playlists.map {|s| [s.playlist, s.id] }, {}, {:style => 'max-width:90px;'}) %>
     </div>
     <%= button_tag(type: 'submit', class: "btn-sm btn-primary") do %>
        Add to Playlist
@@ -34,7 +34,7 @@
   <% end %>
 
   <!-- Delete track form !-->
-  <%= form_tag({:action => 'delete', :song_id => @song, :artist_id => @artist}, :class => 'col-xs-6 col-sm-3') do %><br>
+  <%= form_tag({:action => 'delete', :song_id => @song, :artist_id => @artist}, :class => 'col-sm-3') do %><br>
 
     <%= button_tag(type: 'submit', class: "btn-sm btn-danger") do %>
       <span class="glyphicon glyphicon-remove"></span> Delete

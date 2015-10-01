@@ -2,8 +2,23 @@
  	songs/index.html
    ========================================================================== */
 
-#add-to-playlist-form {
-	border-right:1px solid black;
+@media screen and (max-width: 767px) {
+
+	#add-to-playlist-form {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		margin:10px 0px;
+		padding:10px 0px;
+	}
+
+}
+
+@media screen and (min-width: 767px) {
+
+	#add-to-playlist-form {
+		border-right:1px solid black;
+	}
+
 }
 
 /* ==========================================================================
