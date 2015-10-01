@@ -23,3 +23,17 @@
   <% end %>
 
 <% end %>
+
+<%= form_for(:playlist, :url => {:controller => 'playlists', :action => 'create_songs', :song_id => @song}) do |f| %>
+<% @playlists = Playlist.all %>
+
+<%= error_messages_for(@playlist) %>
+  
+  <div class="form-group">
+    <%= f.select(:id, @playlists.map {|s| [s.playlist, s.id] }) %>
+  </div>
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+     Add to Playlist
+  <% end %>
+
+<% end %>

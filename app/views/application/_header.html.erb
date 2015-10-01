@@ -31,7 +31,7 @@
         </p>
 
         <!-- Conditional to show "Playlist Name Heading" !-->
-        <% if params[:controller] == 'playlists' && params[:action] != 'new' %>
+        <% if params[:controller] == 'playlists' && params[:action] != 'new' && !(params[:action] == 'create_songs' && @playlist.errors.size > 0 ) %>
           <p class="text-center"><%= @playlist.playlist %></p>
         <% end %>
         <!-- End Conditional !-->
@@ -40,7 +40,7 @@
           <ul class="list-unstyled text-center col-xs-12">
             
             <!-- Conditional to show Nav Links for Songs OR Playlists !-->
-            <% if params[:controller] == 'playlists' && params[:action] != 'new' %>
+            <% if params[:controller] == 'playlists' && params[:action] != 'new' && !(params[:action] == 'create_songs' && @playlist.errors.size > 0 ) %>
               <%= link_to('<li class="inline-block p-10">Edit Playlist</li>'.html_safe, {:controller => 'playlists', :action => 'edit', :playlist_id => @playlist.id}) %>
             <% else %>
               <%= link_to('<li class="inline-block p-10">Add Track</li>'.html_safe, {:controller => 'songs', :action => 'new'}) %>

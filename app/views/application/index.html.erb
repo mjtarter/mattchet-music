@@ -10,7 +10,7 @@
 <!-- ********** Conditionals to display the required Modal ********** !-->
 
 <!-- open #edit-song-modal on page load !-->
-<% if !@song.blank? && !(params[:action] == 'delete') %>
+<% if !@song.blank? && !(params[:action] == 'delete') || (params[:action] == 'create_songs' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
 	<script>
 		$(document).ready(function(){
     		$("#edit-song-modal").modal("show");
@@ -80,7 +80,7 @@
 <% end %>
 
 <table class='table table-striped'>
-	<% if (params[:controller] != 'playlists') || (params[:action] == 'create_name' && @playlist.errors.size == 0) || (params[:action] == 'new') %>
+	<% if (params[:controller] != 'playlists') || (params[:action] == 'create_name' && @playlist.errors.size == 0) || (params[:action] == 'new') || (params[:action] == 'create_songs' && @playlist.errors.size > 0 ) %>
 		<th></th>
 	<% end %>
 	<th>Title</th>
@@ -113,7 +113,7 @@
 		<% @songs.each do |song| %>
 			<% artist = song.artist.try(:artist).to_s %>
 			<tr>
-				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') || (params[:action] == 'create_name' && @playlist.errors.size > 0 ) %>
+				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') || (params[:action] == 'create_name' && @playlist.errors.size > 0 ) || (params[:action] == 'create_songs' && @playlist.errors.size > 0 ) %>
 					<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:controller => 'songs', :action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
 				<% end %>
 				<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
