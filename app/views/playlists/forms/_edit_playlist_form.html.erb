@@ -1,21 +1,23 @@
-<%= form_tag({:action => 'update', :playlist_id => @playlist_id}) do %>
+<div class="container" style="max-width:100%;">
+  <%= form_tag({:action => 'update', :playlist_id => @playlist_id}, :class => 'col-sm-6') do %>
 
-<%= error_messages_for(@playlist) %>
-  
-  <div class="form-group">
-    <%= label_tag :playlist, 'Name: ' %>
-    <%= text_field(:playlist, :playlist) %>
-  </div>
-  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-    <span class="glyphicon glyphicon-pencil"></span> Edit Playlist Name
+  <%= error_messages_for(@playlist) %>
+    
+    <div class="form-group">
+      <%= label_tag :playlist, 'Name: ' %>
+      <%= text_field(:playlist, :playlist) %>
+    </div>
+    <%= button_tag(type: 'submit', class: "btn-sm btn-primary") do %>
+      <span class="glyphicon glyphicon-pencil"></span> Edit Name
+    <% end %>
+
   <% end %>
 
-<% end %>
+  <%= form_tag({:action => 'delete', :playlist_id => @playlist_id}, :class => 'col-sm-6') do %><br>
 
-<%= form_tag({:action => 'delete', :playlist_id => @playlist_id}) do %><br>
+    <%= button_tag(type: 'submit', class: "btn-sm btn-danger") do %>
+      <span class="glyphicon glyphicon-remove"></span> Delete playlist
+    <% end %>
 
-  <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
-    <span class="glyphicon glyphicon-remove"></span> Delete playlist
   <% end %>
-
-<% end %>
+</div>
