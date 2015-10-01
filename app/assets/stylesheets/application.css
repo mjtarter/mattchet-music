@@ -117,34 +117,41 @@ header {
 	display:table;
 }
 
-nav ul li ul {
-	display:none;
-	position:absolute;
-	margin:0px;
-	padding:0px;
-}
-
-nav ul li:hover ul {
-	display:block;
-}
-
-ul {
+nav ul {
 	list-style:none;
+	border-radius:5px;
 }
 
-ul li {
-	color:#337ab7;
-}
+	nav ul li {
+		color:#337ab7;
+	}
 
-ul li:hover {
-	color:black;
-}
+		nav ul li:hover {
+			color:black;
+		}
 
-ul li:hover ul{
-	background-color:white;
-	border:2px solid black;
-	padding:0px 4px 0px 4px;
-}
+			nav ul li ul {
+				display:none;
+				position:absolute;
+				margin:0px;
+				padding:0px;
+			}
+
+			nav ul li:hover ul {
+				display:block;
+				background-color:rgba(0,0,0,0.8);
+			}
+
+				nav ul li:hover ul li {
+					padding:5px 10px;
+					border-top:1px solid silver;
+					color:silver;
+				}
+
+				nav ul li:hover ul li:hover {
+					color:white;
+					background-color:rgba(51,122,183,1);
+				}
 
 /* ==========================================================================
  	CRUD

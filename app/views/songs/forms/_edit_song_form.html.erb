@@ -1,8 +1,10 @@
 <div class="container" style="max-width:100%;">
+  <!-- Display form validation errors here !-->
+  <%= error_messages_for(@song) %>
+  <%= error_messages_for(@playlist) %>
+
   <!-- Edit title, artist form !-->
   <%= form_tag({:action => 'update', :artist_to_be_updated => @artist_to_be_updated, :song_id => @song, :artist_id => @artist}, :class => 'col-sm-6') do %>
-
-  <%= error_messages_for(@song) %>
     
     <div class="form-group">
       <%= label_tag :title, 'Title: ' %>
@@ -21,8 +23,6 @@
   <!-- Add track to playlist form!-->
   <%= form_for(:playlist, :url => {:controller => 'playlists', :action => 'create_songs', :song_id => @song}, :html => {:class => 'col-xs-6 col-sm-3', :id => 'add-to-playlist-form'}) do |f| %>
   <% @playlists = Playlist.all %>
-
-  <%= error_messages_for(@playlist) %>
     
     <div class="form-group">
       <%= f.select(:id, @playlists.map {|s| [s.playlist, s.id] }) %>
