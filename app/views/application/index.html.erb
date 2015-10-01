@@ -36,6 +36,13 @@
 	</script>
 <% end %>
 
+<!-- Redirect if user exits modal without filling out form !-->
+<script>
+	$('#add-playlist-modal').on('hidden.bs.modal', function () {
+		window.location.assign("redirect_index")
+	});
+</script>
+
 <!-- open #edit-playlist-modal on page load !-->
 <% if (params[:action] == 'edit' && params[:controller] == 'playlists') || (params[:action] == 'update' && params[:controller] == 'playlists' &&  @playlist.errors.size > 0) %>
 	<script>
@@ -44,13 +51,6 @@
 		});
 	</script>
 <% end %>
-
-<!-- Redirect if user exits modal without filling out form !-->
-<script>
-	$('#add-playlist-modal').on('hidden.bs.modal', function () {
-		window.location.assign("redirect_index")
-	});
-</script>
 
 <!-- open #delete-playlist-modal on page load !-->
 <% if (params[:action] == 'delete' && params[:controller] == 'playlists') %>
@@ -113,7 +113,7 @@
 		<% @songs.each do |song| %>
 			<% artist = song.artist.try(:artist).to_s %>
 			<tr>
-				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') || (params[:action] == 'create_name' && params[:controller] == 'playlists' && @playlist.errors.size > 0 ) %>
+				<% if (params[:controller] != 'playlists') || (params[:action] == 'new') || (params[:action] == 'create_name' && @playlist.errors.size > 0 ) %>
 					<td><%= link_to('<span class="glyphicon glyphicon-pencil"></span>'.html_safe, {:controller => 'songs', :action => 'edit', :song_id => song.id, :artist_id => song.artist_id}) %></td>
 				<% end %>
 				<td><%= link_to(song.title, 'https://www.youtube.com/results?search_query=' + song.title + ' ' + artist, target: "_blank") %></td>
