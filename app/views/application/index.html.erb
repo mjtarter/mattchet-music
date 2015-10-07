@@ -66,9 +66,9 @@
 <!-- Conditional to show "Create Playlist Heading" !-->
 <% if params[:controller] == 'playlists' && params[:action] == 'create_name' && @playlist.errors.size == 0 %>
 	
-	<p class="text-center">Check songs to be add to playlist and then click create.</p>
-	<%= button_tag(type: 'submit', class: "btn btn-danger", onclick: "createPlaylistSubmit()") do %>
-    	<span class="glyphicon glyphicon-remove"></span> Create Playlist
+	<p class="text-center">Check songs to add to playlist and then click the button below.</p>
+	<%= button_tag(type: 'submit', class: "btn-sm btn-primary center-block m-vert-5", onclick: "createPlaylistSubmit()") do %>
+    	<span class="glyphicon glyphicon-ok"></span> Create Playlist
   	<% end %>
   	
   	<%= javascript_tag do %>
