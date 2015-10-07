@@ -1,7 +1,7 @@
 <div class="container" style="max-width:100%;">
-  <%= form_tag({:action => 'update', :playlist_id => @playlist_id}, :class => 'col-sm-6') do %>
-
   <%= error_messages_for(@playlist) %>
+
+  <%= form_tag({:action => 'update', :playlist_id => @playlist_id}, :class => 'col-sm-6') do %>
     
     <div class="form-group">
       <%= label_tag :playlist, 'Name: ' %>

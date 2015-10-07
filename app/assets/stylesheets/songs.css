@@ -13,12 +13,13 @@
 
 }
 
+/*************** Media Queries ***************/
+
 @media screen and (min-width: 767px) {
 
 	#add-to-playlist-form {
 		border-right:1px solid black;
 	}
-
 }
 
 /* ==========================================================================
@@ -27,7 +28,7 @@
 
 #new-song-page {
 	background-image:url('../assets/music-wallpaper.jpg');
-	background-size: 100% auto;
+	background-size: auto 100%;
 	height:100%;
 	height:calc(100% - 98px);
 	background-repeat:no-repeat;
@@ -45,4 +46,13 @@
 #new-song-container{
 	height:100%; 
 	display:table;
+}
+
+/*************** Media Queries ***************/
+
+@media screen and (min-width: 991px) {
+
+	#new-song-page {
+		background-size: 100% auto;
+	}
 }
