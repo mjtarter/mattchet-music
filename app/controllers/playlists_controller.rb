@@ -1,7 +1,7 @@
 class PlaylistsController < ApplicationController
 
 	def new
-		@songs = Song.all
+		@songs = Song.sort_by_artist
 		render('/application/index')	
 	end
 
@@ -10,11 +10,11 @@ class PlaylistsController < ApplicationController
 		if @playlist.save 
 			@playlist_id = @playlist.id
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist created!'
-			@songs = Song.all 
+			@songs = Song.sort_by_artist 
 			render('/application/index')
 		else
 			@playlist_id = @playlist.id
-			@songs = Song.all
+			@songs = Song.sort_by_artist
 			render('/application/index')
 		end
 	end
@@ -54,7 +54,7 @@ class PlaylistsController < ApplicationController
 		@playlist_id = (params[:playlist_id]) 
 		@playlist = Playlist.find(@playlist_id)
 		@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
-		@songs = Song.where(id: @song_ids)
+		@songs = Song.where(id: @song_ids).sort_by_artist
 		render('/application/index')
 	end
 
@@ -62,7 +62,7 @@ class PlaylistsController < ApplicationController
 		@playlist_id = (params[:playlist_id]) 
 		@playlist = Playlist.find(params[:playlist_id])
 		@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
-		@songs = Song.where(id: @song_ids)
+		@songs = Song.where(id: @song_ids).sort_by_artist
 		render('index')
 	end
 
@@ -76,11 +76,11 @@ class PlaylistsController < ApplicationController
 		if @playlist.save
 			flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist name updated!'
 			@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
-			@songs = Song.where(id: @song_ids)
+			@songs = Song.where(id: @song_ids).sort_by_artist
 			render('index')
 		else
 			@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
-			@songs = Song.where(id: @song_ids)			
+			@songs = Song.where(id: @song_ids).sort_by_artist			
 			render('index')
 		end 
 	end
@@ -90,7 +90,7 @@ class PlaylistsController < ApplicationController
 		@playlist = Playlist.find(@playlist_id)
 		# Render index action 
 		@song_ids = Playlisting.where(playlist_id: @playlist_id).pluck(:song_id)
-		@songs = Song.where(id: @song_ids)
+		@songs = Song.where(id: @song_ids).sort_by_artist
 		render('/application/index')
 	end
 
@@ -99,7 +99,7 @@ class PlaylistsController < ApplicationController
 		Playlist.find(params[:playlist_id]).destroy
 
 		flash[:notice] = '<span class="glyphicon glyphicon-music"></span> Playlist Deleted!'
-		@songs = Song.all
+		@songs = Song.sort_by_artist
 		redirect_to(:controller => 'songs', :action => 'index')
 	end
 

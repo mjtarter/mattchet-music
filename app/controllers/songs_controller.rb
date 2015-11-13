@@ -20,7 +20,7 @@ class SongsController < ApplicationController
 	end
 
 	def index
-		@songs = Song.all
+		@songs = Song.sort_by_artist
 	end
 
 	def edit
@@ -29,7 +29,7 @@ class SongsController < ApplicationController
 		@artist = Artist.find(params[:artist_id])
 		@artist_to_be_updated = Artist.find(params[:artist_id])
 		# Render index action 
-		@songs = Song.all
+		@songs = Song.sort_by_artist
 		render('index')
 	end
 
@@ -62,7 +62,7 @@ class SongsController < ApplicationController
 		@song = Song.find(params[:song_id])
 		@artist = Artist.find(params[:artist_id])
 		# Render index action 
-		@songs = Song.all
+		@songs = Song.sort_by_artist
 		render('index')
 	end
 
