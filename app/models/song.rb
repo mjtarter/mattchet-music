@@ -7,5 +7,5 @@ class Song < ActiveRecord::Base
 	validates_associated :artist
 	validates_presence_of :title
 	validates_presence_of :artist
-
+	validates_uniqueness_of :title, :scope => [:artist_id]
 end
